@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Add Verterinarian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <!-- <script src="pages\samples\testScrip.js"></script> -->
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css">
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="pages\samples\pages\samples\testCSS.css">
+
+    <style>
+        .checkbox-wrapper-27 .checkbox {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .checkbox-wrapper-27 .checkbox>input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .checkbox-wrapper-27 .checkbox__icon {
+            display: inline-block;
+            color: #999;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .checkbox-wrapper-27 input[type="checkbox"]:checked~.checkbox__icon {
+            color: #2A7DEA;
+        }
+
+        .checkbox-wrapper-27 .checkbox__icon:before {
+            font-family: "icons-27";
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .checkbox-wrapper-27 .icon--check:before,
+        .checkbox-wrapper-27 input[type="checkbox"]:checked~.checkbox__icon:before {
+            content: "\e601";
+        }
+
+        .checkbox-wrapper-27 .icon--check-empty:before,
+        .checkbox-wrapper-27 .checkbox__icon:before {
+            content: "\e600";
+        }
+
+        .checkbox-wrapper-34 {
+            --blue: #0D7EFF;
+            --g08: #E1E5EB;
+            --g04: #848ea1;
+        }
+
+        .checkbox-wrapper-34 .tgl {
+            display: none;
+        }
+
+        .checkbox-wrapper-34 .tgl,
+        .checkbox-wrapper-34 .tgl:after,
+        .checkbox-wrapper-34 .tgl:before,
+        .checkbox-wrapper-34 .tgl *,
+        .checkbox-wrapper-34 .tgl *:after,
+        .checkbox-wrapper-34 .tgl *:before,
+        .checkbox-wrapper-34 .tgl+.tgl-btn {
+            box-sizing: border-box;
+        }
+
+        .checkbox-wrapper-34 .tgl::selection,
+        .checkbox-wrapper-34 .tgl:after::selection,
+        .checkbox-wrapper-34 .tgl:before::selection,
+        .checkbox-wrapper-34 .tgl *::selection,
+        .checkbox-wrapper-34 .tgl *:after::selection,
+        .checkbox-wrapper-34 .tgl *:before::selection,
+        .checkbox-wrapper-34 .tgl+.tgl-btn::selection {
+            background: none;
+        }
+
+        .checkbox-wrapper-34 .tgl+.tgl-btn {
+            outline: 0;
+            display: block;
+            width: 57px;
+            height: 27px;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            font-size: 12px;
+            font-weight: 400;
+            color: #fff;
+        }
+
+        .checkbox-wrapper-34 .tgl+.tgl-btn:after,
+        .checkbox-wrapper-34 .tgl+.tgl-btn:before {
+            position: relative;
+            display: block;
+            content: "";
+            width: 44%;
+            height: 100%;
+        }
+
+        .checkbox-wrapper-34 .tgl+.tgl-btn:after {
+            left: 0;
+        }
+
+        .checkbox-wrapper-34 .tgl+.tgl-btn:before {
+            display: inline;
+            position: absolute;
+            top: 7px;
+        }
+
+        .checkbox-wrapper-34 .tgl:checked+.tgl-btn:after {
+            left: 56.5%;
+        }
+
+        .checkbox-wrapper-34 .tgl-ios+.tgl-btn {
+            background: var(--g08);
+            border-radius: 20rem;
+            padding: 2px;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-wrapper-34 .tgl-ios+.tgl-btn:after {
+            border-radius: 2em;
+            background: #fff;
+            transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .checkbox-wrapper-34 .tgl-ios+.tgl-btn:before {
+            content: "No";
+            left: 28px;
+            color: var(--g04);
+            transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .checkbox-wrapper-34 .tgl-ios+.tgl-btn:active {
+            box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-wrapper-34 .tgl-ios+.tgl-btn:active:after {
+            padding-right: 0.4em;
+        }
+
+        .checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn {
+            background: var(--blue);
+        }
+
+        .checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn:active {
+            box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn:active:after {
+            margin-left: -0.4em;
+        }
+
+        .checkbox-wrapper-34 .tgl-ios:checked+.tgl-btn:before {
+            content: "Yes";
+            left: 4px;
+            color: #fff;
+        }
+
+        @font-face {
+            font-family: "icons-27";
+            font-weight: normal;
+            font-style: normal;
+            src: url("data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAR4AAoAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAPgAAAD4fZUAVE9TLzIAAAHsAAAAYAAAAGAIIvy3Y21hcAAAAkwAAABMAAAATBpVzFhnYXNwAAACmAAAAAgAAAAIAAAAEGhlYWQAAAKgAAAANgAAADYAeswzaGhlYQAAAtgAAAAkAAAAJAPiAedobXR4AAAC/AAAABgAAAAYBQAAAG1heHAAAAMUAAAABgAAAAYABlAAbmFtZQAAAxwAAAE5AAABOUQYtNZwb3N0AAAEWAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB8Dx0AAACBER0AAAAJHQAAAO8SAAcBAQgPERMWGyBpY29tb29uaWNvbW9vbnUwdTF1MjB1RTYwMHVFNjAxAAACAYkABAAGAQEEBwoNL2X8lA78lA78lA77lA6L+HQVi/yU+JSLi/iU/JSLBd83Fffsi4v77Pvsi4v37AUOi/h0FYv8lPiUi4v33zc3i/s3++yLi/fs9zeL398F9wCFFftN+05JzUdI9xr7GveR95FHzwUO+JQU+JQViwwKAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAACkYCfgXw889QALAgAAAAAAz65FuwAAAADPrkW7AAD/4AIAAeAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAAAFAAAAYAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKACgAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKACgAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");
+        }
+
+        .button {
+            background-color: #04AA6D;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+
+        .button4 {
+            margin-top: 28px;
+            width: 120px;
+            height: 32px;
+            background-color: #e7e7e7;
+            color: black;
+            border: 2px solid #e7e7e7;
+            border-radius: 2px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: 0.1s ease;
+        }
+
+        .button4:hover {
+            background-color: white;
+        }
+    </style>
+
+    <!-- Fetch API POST Method -->
+    <script>
+        function Back() {
+            location.replace("../../pages/tables/Veterinarian_Table.html")
+        }
+        async function AddData() {
+            //Quanlification
+            // Get all checkboxes by their IDs
+            var qual1 = document.getElementById('qual1');
+            var qual2 = document.getElementById('qual2');
+            var qual3 = document.getElementById('qual3');
+
+            // Initialize a string to store checked qualifications
+            var checkedQualifications = "";
+
+            // Check if each checkbox is checked and add its value to the string if it is
+            if (qual1.checked) {
+                checkedQualifications += "DVM, ";
+            }
+            if (qual2.checked) {
+                checkedQualifications += "BVSc, ";
+            }
+            if (qual3.checked) {
+                checkedQualifications += "BVetMed, ";
+            }
+
+            // Remove the trailing comma and space from the end of the string
+            checkedQualifications = checkedQualifications.replace(/, $/, "");
+
+            //Identification
+            var authenticationCheckbox = document.getElementById('toggle-34');
+
+            // Get the authentication checkbox state as a string
+            var authenticationState = authenticationCheckbox.checked ? 'YES' : 'Not YET';
+
+
+
+            var payload = {
+                firstName: document.getElementById("verFirstName").value,
+                lastName: document.getElementById("verLastName").value,
+                email: document.getElementById("verEmail").value,
+                gender: document.getElementById("gender").value,
+                phoneNum: document.getElementById("verPhoneNum").value,
+                password: document.getElementById("password").value,
+                appoinmentschedule: document.getElementById("VerterinarianAppoitment").value,
+                age: document.getElementById("verAge").value,
+                nameOfConsulatingRoom: document.getElementById("nameOfConsulatingRoom").value,
+                quanlification: checkedQualifications,
+                experience: document.getElementById("verExperience").value,
+                identification: authenticationState,
+                checkVaccine: document.getElementById("VerterinarianCheckVaccine").value,
+
+
+            };
+            console.log(payload);
+            await fetch('http://localhost:8080/addVeterinarianuser',
+                {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(function (res) { return res.json(); })
+                .then(function (data) { console.log(JSON.stringify(payload)) })
+            Swal.fire("The data has been saved!");
+
+
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div>
+        <form action="#">
+            <div id="login-box"
+                style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; height: 700px;">
+                <div class="left">
+                    <span style="font-family: 'Gill Sans',sans-serif;">
+                        <h1 style="color: rgb(34, 67, 255);"><b>Add Verterinarian</b></h1>
+                    </span>
+
+                    <input type="text" id="verFirstName" placeholder="First Name" />
+                    <input type="text" id="password" placeholder="Password" />
+                    <input type="text" id="verEmail" placeholder="Email" />
+                    <input type="text" id="verAge" placeholder="Age" />
+                    <input type="text" id="verExperience" placeholder="Experience" />
+                    <textarea id="VerterinarianAppoitment"
+                        style="width: 520px; height: 100px; padding: 12px 20px;box-sizing: border-box; border: 2px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px; resize: none;"
+                        placeholder="Appoinment Schedule"></textarea>
+                    <br><br>
+                    <textarea id="VerterinarianCheckVaccine"
+                        style="width: 520px; height: 90px; padding: 12px 20px;box-sizing: border-box; border: 2px solid #ccc; border-radius: 4px; background-color: #f8f8f8; font-size: 16px; resize: none;"
+                        placeholder="Check Vaccine"></textarea>
+
+                    <div class="checkbox-wrapper-34">
+                        <p style="font-weight: 500;">Authentication</p>
+                        <input class='tgl tgl-ios' id='toggle-34' type='checkbox'>
+                        <label class='tgl-btn' for='toggle-34'></label>
+                    </div>
+                </div>
+
+
+                <div class="right">
+                    <br><br><br>
+                    <input type="text" id="verLastName" placeholder="Last Name" />
+                    <input type="text" id="verPhoneNum" placeholder="Phone Number" />
+
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" style="width: 165px; height: 30px;">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <br><br>
+                    <input type="text" id="nameOfConsulatingRoom" placeholder="Consulating Room" />
+
+                    <div class="checkbox-wrapper-27">
+                        <label for="quanlification">Quanlification:</label>
+                        <label class="checkbox"><br>
+                            <input type="checkbox" id="qual1" name="qual1" value="DVM">
+                            <span class="checkbox__icon"></span>
+                            DVM
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" id="qual2" name="qual2" value="BVSc">
+                            <span class="checkbox__icon"></span>
+                            BVSc
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" id="qual3" name="qual3" value="BVetMed">
+                            <span class="checkbox__icon"></span>
+                            BVetMed
+                        </label>
+                    </div>
+
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                    <table>
+                        <colgroup>
+                            <col span="2">
+                        </colgroup>
+                        <tr>
+                            <td style="vertical-align: top;">
+                                <button type="button" class="button button4" onclick="Back()">CANCEL</button>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <input type="button" name="signup_submit" value="Add New" style="float: right;"
+                                    onclick="AddData()" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</body>
+
+
+</html>

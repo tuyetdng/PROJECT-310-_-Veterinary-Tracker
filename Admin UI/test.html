@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        function RenderItem(data) {
+            str = '';
+            for (i = 0; i < data.length; i++) {
+                str += `<tr>
+                    <td>${data[i].idOw}</td>
+                    <td>${data[i].firstName}</td>
+                    <td>${data[i].lastName}</td>
+                    //<td><input type = 'password' readonly  border = 0 value = ${data[i].password}/></td>
+                    <td>${data[i].password}</td>
+                    <td>${data[i].gender}</td>
+                    <td>${data[i].email}</td>
+                    <td>${data[i].phoneNum}</td>
+                    <td>${data[i].age}</td>
+                    <td>${data[i].numOfPets}</td>
+                    <td>${data[i].phoneNum}</td>
+                    <td>${data[i].appoinmentschedule}</td>
+          </tr>`;
+            }
+            document.getElementById("tableBody").innerHTML = str;
+        }
+        async function GetData() {
+            var url = 'http://localhost:8080/get-all-veterinarianuser';
+            var data;
+            await fetch(url)
+                .then((res) => res.json())
+                .then((json) => data = json);
+            console.log(data);
+            RenderItem(data);
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>User Management</h2>
+
+    <table>
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone number</th>
+                <th>Age</th>
+                <th>Number of pets</th>
+                <th>Appointment schedule</th>
+            </tr>
+
+        </thead>
+        <tbody id='tableBody'>
+
+            <!-- Add more rows for additional users -->
+        </tbody>
+    </table>
+    <script>
+        GetData();
+    </script>
+</body>
+
+</html>

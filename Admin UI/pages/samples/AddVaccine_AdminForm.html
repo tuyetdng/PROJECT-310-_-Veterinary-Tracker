@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Add Vaccine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <!-- <script src="pages\samples\testScrip.js"></script> -->
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css">
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Main Style Css -->
+    <link rel="stylesheet" href="pages\samples\pages\samples\testCSS.css">
+    <style>
+        .button {
+            background-color: #04AA6D;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+
+        .button4 {
+            margin-top: 28px;
+            width: 120px;
+            height: 32px;
+            background-color: #e7e7e7;
+            color: black;
+            border: 2px solid #e7e7e7;
+            border-radius: 2px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: 0.1s ease;
+        }
+
+        .button4:hover {
+            background-color: white;
+        }
+    </style>
+    <!-- Fetch API POST Method -->
+    <script>
+          function Back() {
+                location.replace("../../pages/tables/Vaccine_Table.html")
+            }
+        async function AddData() {
+            var payload = {
+                vacName: document.getElementById("vacName").value,
+                date: document.getElementById("vacDate").value,
+                dose: document.getElementById("vacDosage").value,
+                total: document.getElementById("vacTotal").value
+
+            };
+            console.log(payload);
+            await fetch('http://localhost:8080/addVaccine',
+                {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(function (res) { return res.json(); })
+                .then(function (data) { console.log(JSON.stringify(payload)) })
+            Swal.fire("The data has been saved!");
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div>
+        <form action="#">
+            <div id="login-box"
+                style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; height: 400px;">
+                <div class="left">
+                    <span style="font-family: 'Gill Sans',sans-serif;">
+                        <h1 style="color: rgb(34, 67, 255);"><b>Add Vaccine</b></h1>
+                    </span>
+
+                    <input type="text" id="vacName" placeholder="Vaccine Name" style="width: 510px;" />
+                    <input type="text" id="vacDosage" placeholder="Dosage"
+                        style="width: 510px; margin-bottom: 10px;" /><br>
+                    <label for="vacDate">Date:</label>
+                    <input type="date" id="vacDate" name="vacDate" style="width: 170px;"><br><br>
+
+                    <br><br>
+
+                </div>
+
+
+                <div class="right">
+                    <br><br><br><br><br><br><br><br>
+                    <input type="text" id="vacTotal" placeholder="Total:" />
+
+                    
+                    <table>
+                        <colgroup>
+                            <col span="2">
+                        </colgroup>
+                        <tr>
+                            <td style="vertical-align: top;">
+                                <button type="button" class="button button4" onclick="Back()">CANCEL</button>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <input type="button" name="signup_submit" value="Add New" style="float: right;"
+                                    onclick="AddData()" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</body>
+
+
+</html>
